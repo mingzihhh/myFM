@@ -5,63 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1058109_jfxo26zp46.css">  
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1058109_isaob26pepp.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
    
     <title>my FM</title>
 </head>
 <body>
-    <section id="music-page">
-        <main>
-            <!-- <div class="fm-header clearfix">
-                <img src="img/logo.png" alt="">
-                <h1 class="title">My FM</h1>
-            </div> -->
-            <div class="player clearfix">
-                <div class="aside">
-                    <div class="album"></div>
-                    <div class="buttons">
-                        <span class="like"><i class="iconfont icon-like"></i></span>
-                        <span class="dislike"><i class="iconfont icon-dislike"></i></span>
-                        <span class="play"><i class="iconfont icon-cut"></i></span>
-                        <span class="next"><i class="iconfont icon-play"></i></span>
-                    </div>
+    <div class="fm-header clearfix">
+        <h1 class="logo">Balala FM</h1>
+        <ul class="navbar clearfix">
+            <li class="active"><a href="#music-page">首页</a></li>
+            <li><a href="#music-list">歌单</a></li>
+            <li><a href="#fm-ntro">我的收藏</a></li>
+        </ul>
+    </div>
+    <section id="music-page">       
+        <div class="player clearfix">
+            <div class="album">
+                <img src="img/1.jpg" alt="">
+            </div>
+            <div class="buttons">
+                <span class="like"><i class="iconfont icon-like"></i></span>
+                <span class="dislike"><i class="iconfont icon-prev"></i></span>
+                <span class="play"><i class="iconfont icon-play"></i></span>
+                <span class="next"><i class="iconfont icon-next"></i></span>
+            </div>
+            <div class="detail">
+                <div class="music-info">
+                    <div class="title">Nocturnes: Adantino</div>
+                    <div class="author">Michael Kevin Jones / Agustín Maruri</div>
                 </div>
-                <div class="detail">
-                    <div class="music-info">
-                        <div class="title">Nocturnes: Adantino</div>
-                        <div class="author">Michael Kevin Jones / Agustín Maruri</div>
+                <div class="progress">
+                    <div class="bar">
+                        <div class="total-bar"></div>
+                        <div class="time-bar"></div>
                     </div>
-                    <div class="progress">
-                        <div class="now-time">01:00</div>
-                        <div class="total-time">04:00</div>
-                        <div class="time">
-                            <div class="total-bar"></div>
-                            <div class="time-bar"></div>
+                    <div class="volume">
+                        <i class="iconfont icon-volume"></i>
+                        <div class="v-bar">
+                            <div class="volume-bar"></div>
+                            <div class="adjust-bar"></div>
                         </div>
                     </div>
-                    <div class="playing-lyric">
-                        <span>歌词123132231</span>
+                    <div class="time">
+                        <span class="now-time">00:00</span> /
+                        <span class="total-time">04:00</span>                
                     </div>
                 </div>
+                <div class="lyric">
+                    <div class="all-lyric"></div>
+                </div>
             </div>
-        </main>
-        <footer class="song-list">
-            <div class="carousel">
-                <ul class="img-ct clearfix">
-                    <li><a href="#"><img src="img/1.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="img/2.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="img/3.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="img/4.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="img/4.jpg" alt=""></a></li>
-                </ul>
-            </div>
-            <span class="pre arrow"><i class="iconfont icon-prev"></i></span> 
-            <span class="next arrow"><i class="iconfont icon-next"></i></span>
-
-        </footer>
+        </div>
     </section>
+    <section id='music-list'>
+        <div class="img-ct clearfix">
+            <!-- <div>
+                <a href="#">
+                    <img src="img/1.jpg" alt="">
+                    <div class="shadow"><i class="iconfont icon-list-play"></i></div>
+                </a>
+                <p class="title">111</p>
+            </div> -->
+        </div>
+        <div id="load"></div>
+    </section>
+    <section id='my-songs'> 
+        <div class="list-title clearfix">
+            <div class='cols-1'>序号</div>
+            <div class='cols-2'>歌曲</div>
+            <div class='cols-1'>歌手</div>
+            <div class='cols-1'>时长</div>
+        </div>
+        <ul class="song-list">
+            <!-- <li class="clearfix">
+                <span class='cols-1 index'>1</span>
+                <div class="song-detail cols-2">
+                    <img src="img/1.jpg" alt="">
+                    <span class="title">babbaba</span>
+                </div>
+                <span class='cols-1 author'>lalala</span>
+                <span class='cols-1 duration'>03:40</span>
+            </li> -->
+        </ul>
+  
+
+    </section>
+        
+            
+    <script src='js/index.js'></script>
     
 </body>
 </html>
