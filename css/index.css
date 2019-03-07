@@ -1,46 +1,38 @@
 section {
-    width: 1000px;
     margin: 0 auto;
     background-color: #fff ;
     padding: 5vh 0;
 }
-/* @media (min-width: 600px) {
-    #music-page {
-        width: 500px;
-    }
-} */
 @media (min-width: 900px) {
-    #music-page {
+    section,
+    .fm-header,
+    .player {
         width: 700px;
     }
 }
 @media (min-width: 1000px) {
-    #music-page {
+    section,
+    .fm-header,
+    .player {
         width: 800px;
     }
 }
 @media (min-width: 1200px) {
-    #music-page {
+    section,
+    .fm-header,
+    .player {
         width: 1000px;
     }
 }
 body section {
     display: none;
 }
-#music-page {
-    display: block;
-} 
-#music-page {
-    position: relative;
-    width: 1000px;
-    height: 100%;
-}
 .fm-header {
     position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 1000px;
+    /* width: 1000px; */
     padding-top: 5vh;
     margin-bottom: 10vh;
     border-bottom: 1px solid #aaa;
@@ -77,10 +69,16 @@ body section {
     border: 1px solid #aaa;
     border-bottom: 1px solid #fff;
 }
+.fm-intro {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    font-size: 2vh;
+    line-height: 2;
+}
 .player {
     margin-top: 15vh;
     position: absolute;
-    width: 100%;
     height: 70vh;
 }
 .player .album {
@@ -137,17 +135,12 @@ body section {
 .player .progress {
     margin: 3vh 0 5vh 0;
 }
-.player .progress .bar {
+/* .player .progress .bar {
     position: relative;
     margin-bottom: 1vh;
     padding-top: 1.2vh;
 }
-.player .bar .total-bar {
-    background-color: #ccc;
-    width: 100%;
-    height: 0.4vh;
-    font-size: 0
-}
+
 .player .bar .time-bar {
     position: absolute;
     top: 1.2vh;
@@ -158,33 +151,44 @@ body section {
     height: 0.4vh;
     font-size: 0;
     transition: width 1s;
+} */
+.player .progress .total-bar {
+    background-color: #ccc;
+    width: 100%;
+    height: 0.4vh;
+    margin-bottom: 1vh;
+}
+.player .total-bar .time-bar {
+    background-color: #517dc5;
+    width: 0;
+    height: 0.4vh;
+    transition: width 1s;
 }
 .player .time {
     float: right;
 }
 .player .volume {
     float: left;
-    width: 15vh; /*为了点击进度条设置宽度*/
-}
-.player .volume .v-bar {
     position: relative;
-    margin-left: 5px;
-    width: 0; 
+    height: 3vh;
+} 
+.player .v-bar {
     display: inline-block;
+    margin-left: 1vh;
+    height: 3vh;
+    width: 0;
+    overflow: hidden;
 }
-.player .volume .volume-bar {
-    width: 100%;
+.player .v-bar .volume-bar {
+    width: 10vh;
     height: 3px;
     background-color: #ddd;
-    margin-bottom: 5px;
     border-radius: 5px;
+    margin-top: 2vh;
 }
-.player .volume .adjust-bar {
-    position: absolute;
-    bottom: 5px;
+.player .v-bar .adjust-bar {
     width: 30%;
-    height: 3px;
-    border-radius: 5px;
+    height:3px; 
     background-color: rgba(43, 69, 166, 0.4);
 }
 .player .detail .lyric {
@@ -268,25 +272,25 @@ body section {
 #music-list,#my-songs {
     margin-top: 15vh;
 }
-#music-list .img-ct {
+ .img-ct {
     display: flex;
     flex-flow: wrap;
 }
-#music-list .img-ct>div {
+.img-ct>div {
     flex: 0 1 30vh;
     margin-left: 10vh;
     margin-bottom: 3vh;
 }
-#music-list .img-ct>div a {
+.img-ct>div a {
     position: relative;
     display: block;
     font-size: 0;
 }
-#music-list .img-ct img {
+.img-ct img {
     position: relative;
     width: 100%;
 }
-#music-list .img-ct>div .shadow {
+.img-ct>div .shadow {
     position: absolute;
     top: 0;
     left: 0;
@@ -310,35 +314,6 @@ body section {
     color: #fff;
     font-size: 4vh;
 }
-#music-list .img-ct a:hover .shadow {
+.img-ct>div:hover .shadow {
     display: block;
-}
-#my-songs .cols-1,.cols-2 {
-    float: left;
-}
-#my-songs .cols-1 {
-    text-align: center;
-     width: 20%;
-}
-#my-songs .cols-2 {
-    width: 40%;
-    padding-left: 5%;
-}
-#my-songs .list-title {
-    background-color: #eee;;
-    padding: 2vh 0;
-}
-#my-songs .song-list>li {
-    padding: 1vh 0;
-    border-bottom: 1px solid #aaa;
-}
-#my-songs .song-list>li span {
-    line-height: 5vh;
-}
-#my-songs .song-list>li img {
-    float: left;
-    width: 5vh;
-}
-#my-songs .song-list>li .title {
-    margin-left: 3vh;
 }

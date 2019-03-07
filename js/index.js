@@ -22,6 +22,7 @@ var Paging = {
     bind: function(){
         var _this = this
         this.$nav.on('click',function(){
+            $('.fm-intro').css('display','none')
             $(this).addClass('active').siblings().removeClass('active')
             _this.$panels.hide().eq($(this).index()).fadeIn()
         })
@@ -56,7 +57,6 @@ var MusicList = {
         this.$content.on('click','a',function(){
             EventCenter.fire('select-list',{
                 listId: $(this).attr('list-id'),
-                listLength:  _this.discoverLength
             })
             $musicPlayer.show()
             $musicList.hide()
@@ -138,8 +138,8 @@ var Player = {
         this.rollLine = 0
 
         this.collection = this.loadFromLocal()
-        this.collectIndex = 1 //收藏顺序
-        this.$collect = $('#my-songs .song-list')
+        this.$collectList = $('#my-songs .img-ct')
+        this.isCollect = false
        
        
 
@@ -152,7 +152,6 @@ var Player = {
         EventCenter.on('select-list',function(e,list){
             //console.log('select',list)
             _this.listId = list.listId
-            _this.listLength = list.listLength
             _this.index = 0
             _this.loadSong()
         })
@@ -168,25 +167,32 @@ var Player = {
         })
         //上一首
         this.$container.find('.icon-prev').on('click',function(){
-            if(_this.index > 1){
-                _this.index = _this.index - 2
-                _this.loadSong()
-            }else{
-                console.log(_this.listLength)
-                _this.index = _this.listLength - 1
-                _this.loadSong()
+            if (_this.isCollect) {
+                _this.loadCollection()
+            } else {
+                if (_this.index > 1) {
+                    _this.index = _this.index - 2
+                    _this.loadSong()
+                } else {
+                    _this.index = _this.listLength - 1
+                    _this.loadSong()
+                }
             }
-  
         })
         //切歌
         this.$container.find('.icon-next').on('click',function(){
-            _this.loadSong()
+            if(_this.isCollect){
+                _this.loadCollection()
+            }else{
+                _this.loadSong()
+            }
+            
         })
         //拖动进度条
-        this.$container.find('.bar').on('click',function(e){
+        this.$container.find('.total-bar').on('click',function(e){
             var percent = e.offsetX/parseInt(getComputedStyle(this).width)
             console.log(percent)
-            _this.$container.find('.bar .time-bar').css('width', percent * 100 + '%')
+            _this.$container.find('.total-bar .time-bar').css('width', percent * 100 + '%')
             _this.audio.currentTime = _this.audio.duration * percent
             
         })
@@ -213,13 +219,20 @@ var Player = {
             if($btn.hasClass('active')){
                 $btn.removeClass('active')
                 delete _this.collection[_this.currentSong.title]
-                _this.deleteCollect()
+                console.log(_this.collection)
+                _this.deleteCollect(_this.currentSong.title)
             }else{
                 $btn.addClass('active')
                 _this.collection[_this.currentSong.title] = JSON.stringify(_this.currentSong)
-                _this.renderCollect()
             }
             _this.saveToLocal()
+        })
+        //播放收藏歌曲
+        this.$collectList.on('click','div',function(){
+            $nav.eq(0).addClass('active').siblings().removeClass('active')
+            $('section').hide().eq(0).fadeIn()
+            _this.$container.find('.icon-play').addClass('icon-pause').removeClass('icon-play')
+            _this.loadCollection()
         })
         //更新进度条和歌词
         this.audio.addEventListener('play',function(){
@@ -229,14 +242,20 @@ var Player = {
                 _this.updateLyric()
             },1000)
         })
+        //暂停播放
         this.audio.addEventListener('pause',function(){
             clearInterval(_this.clock)
         })
         //播放完自动切歌
         this.audio.addEventListener('ended',function(){
-            _this.loadSong()
+            if (_this.isCollect) {
+                _this.loadCollection()
+            } else {
+                _this.loadSong()
+            }
         })
     },
+    //加载歌单
     loadSong: function(){
         var _this = this
         $.ajax({    
@@ -253,8 +272,9 @@ var Player = {
             async: false
         }).done(function(ret) {
             var list = ret.Body;
-            // console.log(list)
-            //console.log(_this.index, _this.listLength)
+            _this.isCollect = false
+            _this.listLength = list.length
+            console.log(list, _this.index, _this.listLength)
             if(_this.index < _this.listLength){
                 _this.play(list[_this.index++])
             }else{
@@ -267,12 +287,19 @@ var Player = {
             console.log('error')
         })
     },
+    //播放歌曲
     play: function(song){
         console.log(song)
         var _this = this
         this.currentSong = song
         this.audio.src = song.url
 
+        if(this.isCollect){
+            this.$container.find('.icon-like').addClass('active')
+        }
+        else if(this.$container.find('.icon-like').hasClass('active')){
+            this.$container.find('.icon-like').removeClass('active')
+        }
         this.$container.find('img').attr('src',song.pic)
         this.$container.find('.music-info .title').text(song.title)
         this.$container.find('.music-info .author').text(song.author)
@@ -282,6 +309,7 @@ var Player = {
         }
         this.loadLyric(song.lrc)
     },
+    //时间格式化
     setTime : function(time){
         var min = Math.floor(time / 60);
         var sec = Math.floor(time % 60);
@@ -290,6 +318,7 @@ var Player = {
         return min + ':' + sec;
 
     },
+    //加载歌词
     loadLyric: function(lrc){
         var _this = this
         $.ajax({
@@ -311,24 +340,34 @@ var Player = {
             })
             _this.lrcObj = lrcObject 
             _this.setLyric()
-            // console.log(_this.lrcObj)     
+            //console.log(_this.lrcObj)     
         })
 
     },
+    //歌曲播放时更新时间和进度条
     updateState: function(){
         var time = this.setTime(this.audio.currentTime)
         this.$container.find('.time .now-time').text(time)
-        this.$container.find('.bar .time-bar').css('width',this.audio.currentTime/this.audio.duration*100 + '%')
+        this.$container.find('.total-bar .time-bar').css('width',this.audio.currentTime/this.audio.duration*100 + '%')
      
     },
+    //设置歌词
     setLyric: function(){
         this.$lyricContent.empty()
+        this.$lyricContent.css('top',0)
+        if ($.isEmptyObject(this.lrcObj)){
+            var html = '<p>' + '暂无歌词' + '</p>'
+            var $html = $(html)
+            $html.css('padding-top','10vh')
+            this.$lyricContent.append($html)
+        }
         for(var time in this.lrcObj){
             var html = '<p>'+this.lrcObj[time]+'</p>'
             this.$lyricContent.append($(html))
         }
 
     },
+    //歌曲滚动
     updateLyric: function(){
         var timeStr = this.setTime(this.audio.currentTime)
         var timeArr = Object.keys(this.lrcObj)
@@ -346,32 +385,29 @@ var Player = {
             }
         }
      },
+     //加载收藏
      loadFromLocal: function(){
          return JSON.parse(localStorage['collection']||'{}')
      },
+     //保存为收藏
      saveToLocal: function(){
          localStorage['collection'] = JSON.stringify(this.collection)
+         console.log(localStorage['collection'])
      },
-     renderCollect: function(){
-         var song = this.currentSong
-         var html = `
-            <li class="clearfix">
-                <span class='cols-1 index'></span>
-                <div class="song-detail cols-2">
-                    <img src="img/1.jpg" alt="">
-                    <span class="title"></span>
-                </div>
-                <span class='cols-1 author'></span>
-                <span class='cols-1 duration'></span>
-            </li> 
-         `
-         var $html = $(html)
-         $html.find('.index').text(this.collectIndex++)
-         $html.find('img').attr('src',song.pic)
-         $html.find('.title').text(song.title)
-         $html.find('.author').text(song.author)
-         $html.find('.duration').text(this.setTime(this.audio.duration))
-         this.$collect.append($html)
+     //获取收藏
+     loadCollection: function(){
+         console.log(this.collection)
+         this.isCollect = true
+         var keyArray = Object.keys(this.collection)
+         if(keyArray.length === 0) return 
+         var randomIndex = Math.floor(Math.random()*keyArray.length)
+         var randomTitle = keyArray[randomIndex]
+         var song = JSON.parse(this.collection[randomTitle])
+         this.play(song)
+     },
+     //删除收藏
+     deleteCollect: function(title){
+         localStorage.removeItem(title)
      }
 
     

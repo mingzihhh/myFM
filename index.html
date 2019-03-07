@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1058109_isaob26pepp.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
    
@@ -16,36 +16,42 @@
         <h1 class="logo">Balala FM</h1>
         <ul class="navbar clearfix">
             <li class="active"><a href="#music-page">首页</a></li>
-            <li><a href="#music-list">歌单</a></li>
+            <li><a href="#music-list">电台</a></li>
             <li><a href="#fm-ntro">我的收藏</a></li>
         </ul>
+    </div>
+    <div class="fm-intro">
+        <p>这是一个音乐fm,功能介绍：</p>
+        <p>- 选择电台播放歌曲</p>
+        <p>- 播放暂停歌曲</p>
+        <p>- 上下切换歌曲</p>
+        <p>- 进度条拖拽</p>
+        <p>- 歌词显示滚动</p> 
+        <p>- 音量调整</p>
+        <p>- 收藏歌曲</p>
+        <p>- 取消收藏</p>
+        <p>- 随机播放收藏（收藏开始为空）</p>
     </div>
     <section id="music-page">       
         <div class="player clearfix">
             <div class="album">
-                <img src="img/1.jpg" alt="">
-            </div>
-            <div class="buttons">
-                <span class="like"><i class="iconfont icon-like"></i></span>
-                <span class="dislike"><i class="iconfont icon-prev"></i></span>
-                <span class="play"><i class="iconfont icon-play"></i></span>
-                <span class="next"><i class="iconfont icon-next"></i></span>
+                <img src="" alt="">
             </div>
             <div class="detail">
                 <div class="music-info">
-                    <div class="title">Nocturnes: Adantino</div>
-                    <div class="author">Michael Kevin Jones / Agustín Maruri</div>
+                    <div class="title"></div>
+                    <div class="author"></div>
                 </div>
                 <div class="progress">
-                    <div class="bar">
-                        <div class="total-bar"></div>
+                    <div class="total-bar">
                         <div class="time-bar"></div>
                     </div>
                     <div class="volume">
                         <i class="iconfont icon-volume"></i>
                         <div class="v-bar">
-                            <div class="volume-bar"></div>
-                            <div class="adjust-bar"></div>
+                                <div class="volume-bar">
+                                    <div class="adjust-bar"></div>
+                                </div>
                         </div>
                     </div>
                     <div class="time">
@@ -56,6 +62,12 @@
                 <div class="lyric">
                     <div class="all-lyric"></div>
                 </div>
+            </div>
+            <div class="buttons">
+                <span class="like"><i class="iconfont icon-like"></i></span>
+                <span class="dislike"><i class="iconfont icon-prev"></i></span>
+                <span class="play"><i class="iconfont icon-play"></i></span>
+                <span class="next"><i class="iconfont icon-next"></i></span>
             </div>
         </div>
     </section>
@@ -72,25 +84,15 @@
         <div id="load"></div>
     </section>
     <section id='my-songs'> 
-        <div class="list-title clearfix">
-            <div class='cols-1'>序号</div>
-            <div class='cols-2'>歌曲</div>
-            <div class='cols-1'>歌手</div>
-            <div class='cols-1'>时长</div>
-        </div>
-        <ul class="song-list">
-            <!-- <li class="clearfix">
-                <span class='cols-1 index'>1</span>
-                <div class="song-detail cols-2">
+        <div class="img-ct clearfix">
+            <div>
+                <a href="#">
                     <img src="img/1.jpg" alt="">
-                    <span class="title">babbaba</span>
-                </div>
-                <span class='cols-1 author'>lalala</span>
-                <span class='cols-1 duration'>03:40</span>
-            </li> -->
-        </ul>
-  
-
+                    <div class="shadow"><i class="iconfont icon-list-play"></i></div>
+                </a>
+                <p class="title">我喜欢的</p>
+            </div>
+        </div>
     </section>
         
             
