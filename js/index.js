@@ -167,6 +167,10 @@ var Player = {
         })
         //上一首
         this.$container.find('.icon-prev').on('click',function(){
+            if (_this.$container.find('.icon-play')){
+                _this.$container.find('.icon-play').removeClass('icon-play').addClass('icon-pause')
+            }
+            _this.audio.pause()
             if (_this.isCollect) {
                 _this.loadCollection()
             } else {
@@ -181,6 +185,9 @@ var Player = {
         })
         //切歌
         this.$container.find('.icon-next').on('click',function(){
+            if (_this.$container.find('.icon-play')) {
+                _this.$container.find('.icon-play').removeClass('icon-play').addClass('icon-pause')
+            }
             if(_this.isCollect){
                 _this.loadCollection()
             }else{
@@ -371,18 +378,32 @@ var Player = {
     updateLyric: function(){
         var timeStr = this.setTime(this.audio.currentTime)
         var timeArr = Object.keys(this.lrcObj)
-        if(this.lrcObj && this.lrcObj[timeStr]){
-            var index = timeArr.indexOf(timeStr)
-            //console.log(index,timeStr,this.$lyric.find('p').eq(index)[0])
-            this.$lyric.find('p').eq(index).addClass('playing-lyric')
-                                 .siblings().removeClass('playing-lyric')    
-            var height = this.$lyric.find('p').height()
-            if(index > 4){
-                var remove = - height * (index - 4)
-                this.$lyricContent.animate({
-                    top: remove
-                })
+        var len = timeArr.length
+        var height = this.$lyric.find('p').height()
+        if (timeStr > timeArr[len - 1]) {
+            this.$lyric.find('p').eq(len - 1).addClass('playing-lyric')
+                .siblings().removeClass('playing-lyric')
+            var remove = -height * (len - 4)
+            this.$lyricContent.animate({
+                top: remove
+            })
+        }
+        else {
+            for (var i = 0; i < len; i++) {
+                if (timeStr >= timeArr[i] && timeStr <= timeArr[i + 1]) {
+                    this.$lyric.find('p').eq(i).addClass('playing-lyric')
+                        .siblings().removeClass('playing-lyric')
+                    console.log(i, timeStr, this.$lyric.find('p').eq(i)[0])
+                    if (i > 4) {
+                        var remove = -height * (i - 4)
+                        this.$lyricContent.animate({
+                            top: remove
+                        })
+                    }
+                }
+
             }
+
         }
      },
      //加载收藏
