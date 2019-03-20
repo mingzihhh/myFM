@@ -3,6 +3,7 @@ var $musicPlayer = $('#music-page')
 var $musicList = $('#music-list')
 var $mySongs = $('#my-songs')
 var $nav = $('.fm-header .navbar>li')
+var $btnTool = $('.fm-header .tool .child li')
 
 var EventCenter = {
     on: function(type,handler){
@@ -24,6 +25,22 @@ var Paging = {
         this.$nav.on('click',function(){
             $('.fm-intro').css('display','none')
             $(this).addClass('active').siblings().removeClass('active')
+            _this.$panels.hide().eq($(this).index()).fadeIn()
+        })
+    }
+}
+var btnPaging = {
+    init: function () {
+        this.$panels = $('section')
+        this.$nav = $btnTool
+        console.log(this.$nav)
+        this.bind()
+    },
+    bind: function () {
+        console.log(2)
+        var _this = this
+        this.$nav.on('click', function () {
+            $('.fm-intro').css('display', 'none')
             _this.$panels.hide().eq($(this).index()).fadeIn()
         })
     }
@@ -437,6 +454,7 @@ var Player = {
 var App = {
     init: function(){
         Paging.init()
+        btnPaging.init()
         MusicList.init()
         Player.init()
 

@@ -1,31 +1,12 @@
 section {
-    margin: 0 auto;
     background-color: #fff ;
-    padding: 5vh 0;
-}
-@media (min-width: 900px) {
-    section,
-    .fm-header,
-    .player {
-        width: 700px;
-    }
-}
-@media (min-width: 1000px) {
-    section,
-    .fm-header,
-    .player {
-        width: 800px;
-    }
-}
-@media (min-width: 1200px) {
-    section,
-    .fm-header,
-    .player {
-        width: 1000px;
-    }
+    padding: 5vh 10%;
 }
 body section {
     display: none;
+}
+.fm-header {
+    width: 80%;
 }
 .fm-header {
     position: fixed;
@@ -63,11 +44,19 @@ body section {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     content: '';
     width: 100%;
     height: 6vh;
     border: 1px solid #aaa;
     border-bottom: 1px solid #fff;
+}
+.fm-header .tool-btn {
+    display: none;
+}
+.fm-header .child {
+    display: none;
 }
 .fm-intro {
     position: absolute;
@@ -78,7 +67,7 @@ body section {
 }
 .player {
     margin-top: 15vh;
-    position: absolute;
+    position: positive;
     height: 70vh;
 }
 .player .album {
@@ -94,8 +83,8 @@ body section {
 }
 .player .buttons {
     position: absolute;
-    top: 57vh;
-    left: 0;
+    top: 80vh;
+    left: 10%;
     width: 50vh;
     display: flex;
 }
@@ -135,23 +124,6 @@ body section {
 .player .progress {
     margin: 3vh 0 7vh 0;
 }
-/* .player .progress .bar {
-    position: relative;
-    margin-bottom: 1vh;
-    padding-top: 1.2vh;
-}
-
-.player .bar .time-bar {
-    position: absolute;
-    top: 1.2vh;
-    left: 0;
-    background-color: #517dc5;
-    vertical-align: center;
-    width: 0;
-    height: 0.4vh;
-    font-size: 0;
-    transition: width 1s;
-} */
 .player .progress .total-bar {
     background-color: #ccc;
     width: 100%;
@@ -209,66 +181,6 @@ body section {
 .player .detail .lyric p.playing-lyric {
     color: #4369a6;
 }
-/* 
-.scroll .player .album{
-    width: 10vh;
-    height: 10vh;
-
-}
-.scroll .player .detail {
-    margin-left: 20vh;
-}
-.scroll .detail .title {
-    display: inline-block;
-    font-size: 2.5vh;
-    letter-spacing: 0;
-}
-.scroll .detail .title::after {
-    content: ' - ';
-    font-size: 2.5vh;
-    letter-spacing: 0;
-}
-.scroll .detail .author {
-    display: inline-block;
-    font-size: 2.5vh;
-    letter-spacing: 0;
-}
-
-.scroll .player .progress {
-    margin: 1vh 0 2vh;
-}
-
-.player .progress .bar {
-    position: relative;
-    margin-bottom: 1vh;
-    padding-top: 1.2vh;
-}
-
-.player .bar .total-bar {
-    background-color: #ccc;
-    width: 100%;
-    height: 0.4vh;
-    font-size: 0
-}
-
-.player .bar .time-bar {
-    position: absolute;
-    top: 1.2vh;
-    left: 0;
-    background-color: #517dc5;
-    vertical-align: center;
-    width: 30%;
-    height: 0.4vh;
-    font-size: 0;
-}
-
-.player .time {
-    float: right;
-}
-
-.scroll .detail .playing-lyric {
-    display: none;
-} */
 #music-list,#my-songs {
     margin-top: 15vh;
 }
@@ -317,3 +229,5 @@ body section {
 .img-ct>div:hover .shadow {
     display: block;
 }
+
+
