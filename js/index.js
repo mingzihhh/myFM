@@ -221,7 +221,7 @@ var Player = {
             
         })
         //调整音量
-        this.$volume.mouseenter(function(){
+        this.$volume.click(function(){
             _this.$volume.find('.v-bar').animate({
                 width: '10vh'
             })
