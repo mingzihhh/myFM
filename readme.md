@@ -2,6 +2,8 @@
 
 技术栈：JQuery，css3，ajax，响应式  
 
+预览地址：https://mingzihhh.github.io/myFM/#
+
 功能介绍：
 
 - 选择电台播放歌曲
