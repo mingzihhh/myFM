@@ -1,0 +1,65 @@
+section {
+    padding: 0 10%;
+   
+}
+.fm-header {
+    padding-top: 5vh;
+    position: relative;
+    border: none;
+    margin-bottom: 0;
+}
+.fm-header .navbar {
+    display: none;
+}
+.fm-header .tool-btn {
+    float: right;
+    display: inline-block;
+    border: 1px solid #aaa;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+.fm-header .tool:hover  .child{
+    display: block;
+    float: right;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+
+}
+.fm-header .tool .child>li {
+    padding: 2px 5px;
+}
+.fm-header .tool  a {
+    color: #aaa;
+}
+.fm-header .tool a:hover {
+    color: #4369a6;
+}
+.fm-header .tool .child>li:not(:last-child){
+    border-bottom: 1px solid #ccc;
+}
+.player {
+    margin-top: 5vh;
+}
+.lyric {
+    display: none;
+}
+.player .album {
+    float: none;
+    text-align: center;
+    width: 100%;
+}
+.player img {
+   margin: 0 auto;
+}
+.player .detail {
+    display: block;
+    margin-top: 5vh;
+    text-align: center;
+    margin-left: 0;
+}
+.player .buttons {
+    position: static;
+    width: 100%;
+    
+}
