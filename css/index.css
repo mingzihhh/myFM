@@ -13,7 +13,6 @@ body section {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    /* width: 1000px; */
     padding-top: 5vh;
     margin-bottom: 10vh;
     border-bottom: 1px solid #aaa;
@@ -23,8 +22,8 @@ body section {
 .fm-header .logo {
     float: left;
     color: #4369a6;
-    font-size: 4.5vh;
-    line-height: 6vh;
+    font-size: 30px;
+    line-height: 30px;
     vertical-align: middle;
 }
 .fm-header .navbar {
@@ -34,23 +33,27 @@ body section {
     position: relative;
     float: left;
     margin-right: 3vh;
-    padding: 0 3vh;
-    line-height: 6vh;
+    padding: 0 2vh;
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
 }
 .fm-header .navbar>li a {
     vertical-align: middle;
+}
+.fm-header .navbar>li.active a{
+    color: #4369a6;
 }
 .fm-header .navbar>li.active::after {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    content: '';
+    height: 29px;
     width: 100%;
-    height: 6vh;
+    content: '';
     border: 1px solid #aaa;
     border-bottom: 1px solid #fff;
+    border-radius: 2px 2px 0 0;
 }
 .fm-header .tool-btn {
     display: none;
@@ -144,10 +147,13 @@ body section {
     position: relative;
     height: 3vh;
 } 
+.player .icon-volume {
+    float: left;
+}
 .player .v-bar {
-    display: inline-block;
-    margin-left: 1vh;
-    height: 3vh;
+    float: left;
+    padding-left: 1vh;
+    padding-top: 1vh;
     width: 0;
     overflow: hidden;
 }
@@ -156,7 +162,7 @@ body section {
     height: 3px;
     background-color: #ddd;
     border-radius: 5px;
-    margin-top: 2vh;
+    margin-top: 0.5vh;
 }
 .player .v-bar .adjust-bar {
     width: 30%;
